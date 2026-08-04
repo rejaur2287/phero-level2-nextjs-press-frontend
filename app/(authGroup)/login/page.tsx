@@ -1,4 +1,4 @@
-import React from 'react'
+
 import { Button } from "@/components/ui/button"
 import {
     Card,
@@ -11,8 +11,11 @@ import {
 } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import LoginButton from '../_components/loginButton'
 
 const LoginPage = () => {
+    console.log(process.env.BACKEND_API_URL, 'sensitive')
+    console.log(process.env.NEXT_PUBLIC_BACKEND_API_URL, 'public')
     return (
         <Card className="w-full max-w-sm">
             <CardHeader>
@@ -58,6 +61,7 @@ const LoginPage = () => {
                 <Button variant="outline" className="w-full">
                     Login with Google
                 </Button>
+                <LoginButton />
             </CardFooter>
         </Card>
     )

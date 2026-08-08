@@ -5,9 +5,11 @@ import { getMe } from '@/service/getMe'
 const AuthGroupLayout = async ({ children }: { children: React.ReactNode }) => {
     const user = await getMe()
     return (
-        <div className="max-w-7xl mx-auto">
+        <div>
             <Navbar user={user} />
-            {children}
+            <div className="max-w-7xl mx-auto">
+                {children}
+            </div>
         </div>
     )
 }

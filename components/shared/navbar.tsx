@@ -29,35 +29,35 @@ const userMenuItems = [
     { label: "Settings", icon: Settings, action: "settings" },
 ];
 
-// type IUser = {
-//     success: boolean,
-//     message: string,
-//     data: {
-//         profile: {
-//             id: string,
-//             name: string,
-//             email: string,
-//             activeStatus: string,
-//             role: string,
-//             createdAt: string,
-//             updatedAt: string,
-//             profile: {
-//                 id: string,
-//                 profilePhoto: string,
-//                 bio: string | null,
-//                 userId: string,
-//                 createdAt: string,
-//                 updatedAt: string
-//             }
-//         }
-//     }
-// }
+type IUser = {
+    success: boolean,
+    message: string,
+    data: {
+        profile: {
+            id: string,
+            name: string,
+            email: string,
+            activeStatus: string,
+            role: string,
+            createdAt: string,
+            updatedAt: string,
+            profile: {
+                id: string,
+                profilePhoto: string,
+                bio: string | null,
+                userId: string,
+                createdAt: string,
+                updatedAt: string
+            }
+        }
+    }
+}
 
-// type NavbarProps = {
-//     user: IUser
-// }
+type NavbarProps = {
+    user: IUser
+}
 
-export function Navbar() {
+export function Navbar({ user }: NavbarProps) {
     // const router = useRouter()
     const handleUserMenuAction = async (action: string) => {
         console.log(`User Menu action : ${action}`)
@@ -108,12 +108,12 @@ export function Navbar() {
                             <DropdownMenuLabel className="font-normal">
                                 <div className="flex flex-col gap-1">
                                     <p className="text-sm font-medium">
-                                        {/* {user.data?.profile.name} */}
-                                        Md. Rejaur Rahman
+                                        {user.data.profile.name}
+
                                     </p>
                                     <p className="text-xs text-muted-foreground">
-                                        {/* {user.data?.profile.email} */}
-                                        rezaurewubd@gmail.com
+                                        {user.data.profile.email}
+
                                     </p>
                                 </div>
                             </DropdownMenuLabel>

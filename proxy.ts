@@ -7,12 +7,17 @@ export function proxy(request: NextRequest) {
   console.log(request.nextUrl, "request");
   console.log(pathname, "pathname");
   console.log("proxy", proxy);
-  return NextResponse.redirect(new URL("/", request.url));
+  //   return NextResponse.redirect(new URL("/", request.url));
+
+  return NextResponse.next();
 }
 
 // Alternatively, you can use a default export:
 // export default function proxy(request: NextRequest) { ... }
 
 export const config = {
-  matcher: ["/dashboard/:path*", "/admin-dashboard/:path*"],
+  matcher: [
+    // "/dashboard/:path*", "/admin-dashboard/:path*",
+    "/((?!api|_next/static|favicon.ico|_next/image.*\\.png$).*)",
+  ],
 };

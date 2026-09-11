@@ -14,19 +14,19 @@ export function NewsCard({ post }: NewsCardProps) {
     return (
         <Card className="gap-4">
             {post.thumbnail && (
-                <img
-                    src={post.thumbnail}
-                    alt={post.title}
-                    className="h-48 w-full object-cover"
-                />
-                // <Image
+                // <img
                 //     src={post.thumbnail}
-                //     unoptimized
                 //     alt={post.title}
-                //     width={400}
-                //     height={400}
-                // // fill
+                //     className="h-48 w-full object-cover"
                 // />
+                <Image
+                    src={post.thumbnail}
+                    unoptimized
+                    alt={post.title}
+                    width={400}
+                    height={400}
+                // fill ={true}
+                />
             )}
             <CardHeader>
                 <div className="flex flex-wrap items-center gap-1.5">

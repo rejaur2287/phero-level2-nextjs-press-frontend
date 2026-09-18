@@ -9,8 +9,8 @@ const PremiumPage = async ({
 }: {
     searchParams: Promise<{ [key: string]: string | string[] | undefined }>
 }) => {
-    const search = await searchParams
-    console.log(JSON.parse(search.tags as string), 'Search Params')
+    // const search = await searchParams
+    // console.log(JSON.parse(search.tags as string), 'Search Params')
     return (
         <div className="mx-auto max-w-7xl space-y-6 px-4 py-10 sm:px-6 lg:px-8">
             <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
@@ -21,11 +21,11 @@ const PremiumPage = async ({
                     </p>
                 </div>
 
-                {/* <NewsSearchBar /> */}
+                <NewsSearchBar />
             </div>
 
             <Suspense fallback={<NewsSkeleton />}>
-                <PremiumNewsList />
+                <PremiumNewsList searchParams={searchParams} />
             </Suspense>
         </div>
     );

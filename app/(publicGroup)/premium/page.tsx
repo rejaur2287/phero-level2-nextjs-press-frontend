@@ -4,7 +4,13 @@ import { NewsSkeleton } from "../_components/news/NewsSkeleton";
 import { PremiumNewsList } from "../_components/news/PremiumNewsList";
 
 
-const PremiumPage = async () => {
+const PremiumPage = async ({
+    searchParams,
+}: {
+    searchParams: Promise<{ [key: string]: string | string[] | undefined }>
+}) => {
+    const search = await searchParams
+    console.log(JSON.parse(search.tags as string), 'Search Params')
     return (
         <div className="mx-auto max-w-7xl space-y-6 px-4 py-10 sm:px-6 lg:px-8">
             <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">

@@ -13,6 +13,10 @@ export const getPublicNews = async ({
     `${process.env.BACKEND_API_URL}/api/posts?${params.toString()}`,
     {
       cache: "no-store",
+      next: {
+        revalidate: 60 * 60 * 6,
+        tags: ["public-posts"],
+      },
     },
   );
 

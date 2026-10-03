@@ -61,12 +61,91 @@ export const createPost = async (prevState: PostState, formData: FormData) => {
   const result = await res.json();
 
   if (result.success) {
-    revalidateTag("my-posts", "max");
+    revalidateTag("my-posts", {
+      expire: 0,
+    });
   }
   if (result.success && result.data.isPremium) {
-    revalidateTag("premium-posts", "max");
+    revalidateTag("premium-posts", {
+      expire: 0,
+    });
   } else {
-    revalidateTag("public-posts", "max");
+    revalidateTag("public-posts", {
+      expire: 0,
+    });
+  }
+
+  // console.log(result);
+
+  return result;
+};
+
+export const updatePost = async (
+  postId: string,
+  prevState: PostState,
+  formData: FormData,
+) => {
+  console.log({
+    postId,
+  });
+  console.log({
+    title: formData.get("title"),
+    content: formData.get("content"),
+    thumbnail: formData.get("thumbnail"),
+    tags: (formData.get("tags") as string).split(", "),
+    isPremium: formData.get("isPremium") === "on",
+  });
+
+  const payload = {
+    title: formData.get("title") ?? "",
+    content: formData.get("content") ?? "",
+    thumbnail: formData.get("thumbnail") ?? "",
+    tags: (formData.get("tags") as string).split(", ") ?? "",
+    isPremium: formData.get("isPremium") === "on",
+  };
+
+  const cookieStore = await cookies();
+  const accessToken = cookieStore.get("accessToken")?.value || null;
+
+  if (!accessToken) {
+    // throw new Error("User not Logged In!");
+    return {
+      success: false,
+      message: "User not Logged In!",
+    };
+  }
+
+  const res = await fetch(
+    `${process.env.BACKEND_API_URL}/api/posts/${postId}`,
+    {
+      method: "PATCH",
+      headers: {
+        //   Authorization: accessToken as unknown as string,
+        //   Authorization: `${accessToken}`,
+        //   Authorization: `Bearer${accessToken}`,
+
+        Cookie: `accessToken = ${accessToken}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    },
+  );
+
+  const result = await res.json();
+
+  if (result.success) {
+    revalidateTag("my-posts", {
+      expire: 0,
+    });
+  }
+  if (result.success && result.data.isPremium) {
+    revalidateTag("premium-posts", {
+      expire: 0,
+    });
+  } else {
+    revalidateTag("public-posts", {
+      expire: 0,
+    });
   }
 
   // console.log(result);

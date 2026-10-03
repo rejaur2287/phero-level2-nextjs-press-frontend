@@ -11,7 +11,7 @@ import { IPost } from "@/lib/types";
 import { PencilIcon, PlusIcon } from "lucide-react";
 import { useActionState, useEffect, useState } from "react";
 import { toast } from "sonner";
-import { createPost } from "../_actions/myPostsActions";
+import { createPost, updatePost } from "../_actions/myPostsActions";
 
 type PostFormDialogProps = {
     mode: "create" | "edit";
@@ -22,7 +22,7 @@ export function PostFormDialog({ mode, post }: PostFormDialogProps) {
     const [open, setOpen] = useState(false);
 
     const action = mode === "edit" && post
-        ? createPost
+        ? updatePost.bind(null, post.id)
         : createPost;
 
     const [state, formAction, pending] = useActionState(action, null) as any;

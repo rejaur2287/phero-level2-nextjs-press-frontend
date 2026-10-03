@@ -15,6 +15,7 @@ import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { Button } from "../ui/button";
 import { logout } from "@/service/logout";
+import { NavbarProps } from "@/lib/types";
 
 // Navigation items configuration
 const navItems = [
@@ -33,33 +34,7 @@ const userMenuItems = [
     { label: "Settings", icon: Settings, action: "settings" },
 ];
 
-type IUser = {
-    success: boolean,
-    message: string,
-    data: {
-        profile: {
-            id: string,
-            name: string,
-            email: string,
-            activeStatus: string,
-            role: string,
-            createdAt: string,
-            updatedAt: string,
-            profile: {
-                id: string,
-                profilePhoto: string,
-                bio: string | null,
-                userId: string,
-                createdAt: string,
-                updatedAt: string
-            }
-        }
-    }
-}
 
-type NavbarProps = {
-    user: IUser
-}
 
 export function Navbar({ user }: NavbarProps) {
     const router = useRouter()

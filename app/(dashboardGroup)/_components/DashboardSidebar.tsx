@@ -16,18 +16,18 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { sidebarMenuItems } from "../_config/sidebarMenuItems";
 
-const navItems = [
-    {
-        label: "My Posts",
-        href: "/dashboard/my-posts",
-        icon: Podcast,
-    },
-    {
-        label: "My Profile",
-        href: "/dashboard/my-profile",
-        icon: Podcast,
-    },
-];
+// const navItems = [
+//     {
+//         label: "My Posts",
+//         href: "/dashboard/my-posts",
+//         icon: Podcast,
+//     },
+//     {
+//         label: "My Profile",
+//         href: "/dashboard/my-profile",
+//         icon: Podcast,
+//     },
+// ];
 
 export default function DashboardSidebar({ user }: NavbarProps) {
     const pathname = usePathname();
@@ -49,7 +49,7 @@ export default function DashboardSidebar({ user }: NavbarProps) {
             collapsible="none"
             className=" h-[calc(100svh-0rem)] border-r border-sidebar-border"
         >
-            <SidebarHeader>
+            {/* <SidebarHeader>
                 <div className="flex items-center gap-2 px-2 py-1.5">
                     <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md bg-sidebar-primary text-sidebar-primary-foreground">
                         <Newspaper className="h-4 w-4" />
@@ -61,7 +61,7 @@ export default function DashboardSidebar({ user }: NavbarProps) {
                         </span>
                     </div>
                 </div>
-            </SidebarHeader>
+            </SidebarHeader> */}
 
             <SidebarContent>
                 <SidebarGroup>

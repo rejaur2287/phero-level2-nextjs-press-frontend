@@ -92,7 +92,7 @@ export async function proxy(request: NextRequest) {
   if (!accessToken && !isPublicRoute && !isAuthRoute) {
     const loginUrl = new URL("/login", request.url);
 
-    loginUrl.searchParams.set("redirectTo", pathname);
+    loginUrl.searchParams.set("redirectTo", pathname + request.nextUrl.search);
 
     return NextResponse.redirect(loginUrl);
   }

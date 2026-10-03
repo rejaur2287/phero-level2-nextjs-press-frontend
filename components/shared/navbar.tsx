@@ -9,7 +9,7 @@ import {
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-import { LogOut, Settings, User } from "lucide-react";
+import { LayoutDashboard, LogOut, Settings, User } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
@@ -30,6 +30,7 @@ const navItems = [
 
 // User menu items configuration
 const userMenuItems = [
+    { label: "Dashboard", icon: LayoutDashboard, action: "dashboard" },
     { label: "Profile", icon: User, action: "profile" },
     { label: "Settings", icon: Settings, action: "settings" },
 ];
@@ -41,6 +42,19 @@ export function Navbar({ user }: NavbarProps) {
     const handleUserMenuAction = async (action: string) => {
         console.log(`User Menu action : ${action}`)
 
+        if (action === "dashboard") {
+            if (user.data.profile.role === 'USER') {
+                router.push("/dashboard")
+            }
+            else if (user.data.profile.role === 'ADMIN') {
+                router.push("/admin-dashboard")
+            }
+            else if (user.data.profile.role === 'AUTHOR') {
+                router.push("/author-dashboard")
+            }
+
+            return
+        }
 
         if (action === "logout") {
             await logout();
